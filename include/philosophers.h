@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/06 14:09:38 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/09 21:38:12 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,10 @@
 # include <stdbool.h>
 # include <sys/time.h>
 
-typedef enum	e_state
-{
-	THINKING,
-	EATING,
-	SLEEPING,
-	DIED,
-	TOOK_FORK
-}	t_state;
+# define PHILOS_MAX 200
 
-// tudo que for compartilhado entre eles
-typedef struct	s_rules
+// tudo que for compartilhado entre eles (delete)
+typedef struct s_rules
 {
 	int				number_of_philos;
 	int				time_to_die;
@@ -46,30 +39,39 @@ typedef struct	s_rules
 	pthread_mutex_t	death_mutex;
 }	t_rules;
 
-// cada philo
-typedef struct	s_philo
+// cada philo (delete)
+typedef struct s_philo
 {
 	int				id;
 	int				status;
 	int				meals_eaten;
 	long long		last_meal;
 	pthread_t		thread;
+	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	t_rules			*rules;
 }	t_philo;
 
-
-
 // utils
 int			check_args(char **argv);
 long		ft_atol(const char *str);
 long long	get_time(void);
-
+void		print_state(char *str, t_philo *philo);
 
 // init structs
 int			init_rules(t_rules *rules, char **argv);
 t_philo		*init_philos(t_rules *rules);
 
+// threads
+int			dead_loop(t_philo *philo);
+void		*monitor(void *arg);
+void		create_threads(t_philo *philo, t_rules *rules);
+
+// philos routine
+void		thinking(t_philo *philo);
+void		sleeping(t_philo *philo);
+void		eating(t_philo *philo);
+void		*philo_routine(void *arg);
 
 #endif

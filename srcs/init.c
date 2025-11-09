@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:06:54 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/06 14:09:48 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:44:55 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	init_rules(t_rules *rules, char **argv)
 {
 	int	i;
-	
+
 	i = 0;
 	rules->number_of_philos = ft_atol(argv[1]);
 	rules->time_to_die = ft_atol(argv[2]);
@@ -59,12 +59,13 @@ t_philo	*init_philos(t_rules *rules)
 	while (i < rules->number_of_philos)
 	{
 		philos[i].id = i + 1;
-		philos[i].status = THINKING;
 		philos[i].meals_eaten = 0;
 		philos[i].last_meal = get_time();
 		philos[i].l_fork = &rules->forks[i];
 		philos[i].r_fork = &rules->forks[(i + 1) % rules->number_of_philos];
 		philos[i].rules = rules;
+		if (pthread_mutex_init(&philos[i].meal_mutex, NULL) != 0)
+			return (NULL);
 		i++;
 	}
 	return (philos);
