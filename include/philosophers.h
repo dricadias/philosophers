@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:38:12 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/09 21:43:58 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void		thinking(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		eating(t_philo *philo);
 void		*philo_routine(void *arg);
+
+int	check_if_all_ate(t_philo *philo);
 
 #endif
