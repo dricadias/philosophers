@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:46:23 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/10 14:10:36 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:16:35 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_if_all_ate(t_philo *philo)
 	return (0);
 }
 
-int		check_dead(t_philo *philo)
+int	check_dead(t_philo *philo)
 {
 	int			i;
 	long long	last;

@@ -6,7 +6,7 @@
 #    By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/02 17:25:00 by adias-do          #+#    #+#              #
-#    Updated: 2025/11/09 21:47:35 by adias-do         ###   ########.fr        #
+#    Updated: 2025/11/10 16:53:15 by adias-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS = srcs/philo.c \
 		srcs/init.c \
 		srcs/routine.c \
 		srcs/threads.c \
-		srcs/monitor.c
+		srcs/monitor.c \
+		srcs/free.c
 OBJS = $(SRCS:.c=.o)
 
 .c.o:

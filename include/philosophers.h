@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/10 14:23:32 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:15:37 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define PHILOS_MAX 200
 
-// tudo que for compartilhado entre eles (delete)
+// all that is shared between them
 typedef struct s_rules
 {
 	int				number_of_philos;
@@ -33,13 +33,13 @@ typedef struct s_rules
 	int				must_eat;
 	bool			has_limit;
 	bool			philo_died;
-	long long		start_time; // calcular os timestamps (tempo_atual - start_time)
+	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 }	t_rules;
 
-// cada philo (delete)
+// each philo
 typedef struct s_philo
 {
 	int				id;
@@ -58,6 +58,9 @@ int			check_args(char **argv);
 long		ft_atol(const char *str);
 long long	get_time(void);
 void		ft_usleep(long long time, t_philo *philo);
+
+// free
+void		destroy_all(t_philo *philo, t_rules *rules);
 
 // init structs
 int			init_rules(t_rules *rules, char **argv);

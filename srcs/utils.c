@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:05:11 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/10 14:24:00 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:25:30 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ long	ft_atol(const char *str)
 	return (res * sign);
 }
 
+/* 
+	if (rules.number_of_philos <= 0 || rules.time_to_die <= 0 || 
+	rules.time_to_eat <= 0 || rules.time_to_sleep <= 0 || rules.must_eat <= 0)
+		return(printf("error: invalid values\n"), 1);
+	return (0); */
 int	check_args(char **argv)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 01:01:01 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:55:07 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:24:56 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,12 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6 || check_args(argv))
 		return (printf("error: invalid args.\n"), 1);
 	if (init_rules(&rules, argv) != 0)
-		return (1); // funcao de limpar tudo e sair !
+		destroy_all(NULL, &rules);
 	philo = init_philos(&rules);
 	if (!philo)
-		return (1); // funcao de limpar tudo e sair !
+		destroy_all(philo, &rules);
 	rules.start_time = get_time();
 	create_threads(philo, &rules);
-	// funcao de limpar tudo e sair !
+	destroy_all(philo, &rules);
 	return (0);
 }
-
-
-
-/* 
-	if (rules.number_of_philos <= 0 || rules.time_to_die <= 0 || rules.time_to_eat <= 0 || rules.time_to_sleep <= 0 || rules.must_eat <= 0)
-		return(printf("error: invalid values\n"), 1);
-	return (0); */

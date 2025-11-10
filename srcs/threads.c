@@ -6,13 +6,13 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:33:27 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:47:08 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:58:02 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int		dead_loop(t_philo *philo)
+int	dead_loop(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->death_mutex);
 	if (philo->rules->philo_died == true)
@@ -27,21 +27,22 @@ void	create_threads(t_philo *philo, t_rules *rules)
 	pthread_t	monitor_thread;
 
 	if (pthread_create(&monitor_thread, NULL, &monitor, philo) != 0)
-		return ; // funcao pra destruir, limpar e sair.
+		return ;
 	i = 0;
 	while (i < rules->number_of_philos)
 	{
-		if (pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]) != 0)
-			return ; // funcao pra destruir, limpar e sair.
+		if (pthread_create(&philo[i].thread, NULL,
+				&philo_routine, &philo[i]) != 0)
+			return ;
 		i++;
 	}
 	i = 0;
 	if (pthread_join(monitor_thread, NULL) != 0)
-		return ; // funcao pra destruir, limpar e sair.
+		return ;
 	while (i < rules->number_of_philos)
 	{
 		if (pthread_join(philo[i].thread, NULL) != 0)
-			return ; // funcao pra destruir, limpar e sair.
+			return ;
 		i++;
 	}
 }
