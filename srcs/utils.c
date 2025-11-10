@@ -6,13 +6,12 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:05:11 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/06 14:08:59 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:24:00 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-// utils
 long	ft_atol(const char *str)
 {
 	int		i;
@@ -38,22 +37,21 @@ long	ft_atol(const char *str)
 	return (res * sign);
 }
 
-// utils
 int	check_args(char **argv)
 {
 	int		i;
 	int		j;
 	long	temp;
-	
+
 	i = 1;
-	while(argv[i])
+	while (argv[i])
 	{
 		j = 0;
-		while(argv[i][j])
+		while (argv[i][j])
 		{
-			/* if (argv[i][j] == '+')
-				j++; */ // nao sei se tenho que aceitar isso
-			if (argv[i][j] == '-' || argv[i][j] == '+')
+			if (argv[i][j] == '+')
+				j++;
+			if (argv[i][j] == '-')
 				return (1);
 			if (argv[i][j] && (argv[i][j] < '0' || argv[i][j] > '9'))
 				return (1);
@@ -67,10 +65,9 @@ int	check_args(char **argv)
 	return (0);
 }
 
-// utils
 long long	get_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
@@ -78,4 +75,17 @@ long long	get_time(void)
 		exit(1);
 	}
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_usleep(long long time, t_philo *philo)
+{
+	long long	start;
+
+	start = get_time();
+	while (!dead_loop(philo))
+	{
+		if (get_time() - start >= time)
+			break ;
+		usleep(500);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:15:26 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:39:58 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:25:37 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	thinking(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	print_state("is sleeping", philo);
-	usleep(philo->rules->time_to_sleep * 1000);
+	ft_usleep(philo->rules->time_to_sleep, philo);
 }
 
 void	eating(t_philo *philo)
@@ -65,6 +65,11 @@ void	eating(t_philo *philo)
 		pthread_mutex_unlock(first);
 		return ;
 	}
+	if (dead_loop(philo))
+	{
+		pthread_mutex_unlock(first);
+		return ;
+	}
 	pthread_mutex_lock(second);
 	print_state("has taken a fork", philo);
 	print_state("is eating", philo);
@@ -72,7 +77,7 @@ void	eating(t_philo *philo)
 	philo->last_meal = get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_mutex);
-	usleep(philo->rules->time_to_eat * 1000);
+	ft_usleep(philo->rules->time_to_eat, philo);
 	pthread_mutex_unlock(first);
 	pthread_mutex_unlock(second);
 }

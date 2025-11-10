@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 01:01:01 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:36:49 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/09 21:55:07 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,6 @@ void	print_state(char *str, t_philo *philo)
 	timestamp = get_time() - philo->rules->start_time;
 	printf("%lld %d %s\n", timestamp, philo->id, str);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
-}
-
-int	check_if_all_ate(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	if (!philo->rules->has_limit)
-		return (1);
-	while (i < philo[0].rules->number_of_philos)
-	{
-		pthread_mutex_lock(&philo[i].meal_mutex);
-		if (philo[i].meals_eaten < philo->rules->must_eat)
-		{
-			pthread_mutex_unlock(&philo[i].meal_mutex);
-			return (1);
-		}
-		pthread_mutex_unlock(&philo[i].meal_mutex);
-		i++;
-	}
-	return (0);
 }
 
 int	main(int argc, char **argv)

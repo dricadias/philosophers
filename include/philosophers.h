@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 21:43:58 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:23:32 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_philo
 int			check_args(char **argv);
 long		ft_atol(const char *str);
 long long	get_time(void);
-void		print_state(char *str, t_philo *philo);
+void		ft_usleep(long long time, t_philo *philo);
 
 // init structs
 int			init_rules(t_rules *rules, char **argv);
@@ -65,7 +65,6 @@ t_philo		*init_philos(t_rules *rules);
 
 // threads
 int			dead_loop(t_philo *philo);
-void		*monitor(void *arg);
 void		create_threads(t_philo *philo, t_rules *rules);
 
 // philos routine
@@ -74,6 +73,12 @@ void		sleeping(t_philo *philo);
 void		eating(t_philo *philo);
 void		*philo_routine(void *arg);
 
-int	check_if_all_ate(t_philo *philo);
+// monitor
+int			check_if_all_ate(t_philo *philo);
+void		*monitor(void *arg);
+
+// main
+int			main(int argc, char **argv);
+void		print_state(char *str, t_philo *philo);
 
 #endif
