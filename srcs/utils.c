@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:05:11 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 15:00:26 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:24:47 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,15 @@ void	print_state(char *str, t_philo *philo)
 {
 	long long	timestamp;
 
-	if (dead_loop(philo))
-		return ;
 	pthread_mutex_lock(&philo->rules->print_mutex);
+	pthread_mutex_lock(&philo->rules->death_mutex);
+	if (philo->rules->philo_died == true)
+	{
+		pthread_mutex_unlock(&philo->rules->death_mutex);
+		pthread_mutex_unlock(&philo->rules->print_mutex);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->rules->death_mutex);
 	timestamp = get_time() - philo->rules->start_time;
 	printf("%lld %d %s\n", timestamp, philo->id, str);
 	pthread_mutex_unlock(&philo->rules->print_mutex);

@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:46:23 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 14:29:35 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:32:41 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_dead(t_philo *philo)
 {
 	int			i;
 	long long	last;
+	long long	timestamp;
 
 	i = 0;
 	while (i < philo[0].rules->number_of_philos)
@@ -46,10 +47,13 @@ int	check_dead(t_philo *philo)
 		pthread_mutex_unlock(&philo[i].meal_mutex);
 		if ((get_time() - last) > philo[i].rules->time_to_die)
 		{
-			print_state("has died", &philo[i]);
+			pthread_mutex_lock(&philo->rules->print_mutex);
 			pthread_mutex_lock(&philo[i].rules->death_mutex);
 			philo[i].rules->philo_died = true;
 			pthread_mutex_unlock(&philo[i].rules->death_mutex);
+			timestamp = get_time() - philo[i].rules->start_time;
+			printf("%lld %d %s\n", timestamp, philo[i].id, "has died");
+			pthread_mutex_unlock(&philo->rules->print_mutex);
 			return (1);
 		}
 		i++;

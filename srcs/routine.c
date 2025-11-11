@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:15:26 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 13:07:07 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:37:33 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 	{
-		thinking(philo);
-		usleep(philo->rules->time_to_eat * 500);
+		ft_usleep(1, philo);
 	}
 	while (!dead_loop(philo))
 	{
@@ -33,7 +32,17 @@ void	*philo_routine(void *arg)
 
 void	thinking(t_philo *philo)
 {
+	long long	think_t;
+
 	print_state("is thinking", philo);
+	if (philo->rules->number_of_philos % 2 != 0)
+	{
+		think_t = (philo->rules->time_to_eat * 2) - philo->rules->time_to_sleep;
+		if (think_t < 0)
+			think_t = 0;
+		if (think_t > 0)
+			ft_usleep(think_t, philo);
+	}
 }
 
 void	sleeping(t_philo *philo)
