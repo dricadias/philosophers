@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/10 17:15:37 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 01:20:23 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			check_args(char **argv);
 long		ft_atol(const char *str);
 long long	get_time(void);
 void		ft_usleep(long long time, t_philo *philo);
+int			grab_forks(t_philo *phi, pthread_mutex_t *f, pthread_mutex_t *sec);
 
 // free
 void		destroy_all(t_philo *philo, t_rules *rules);

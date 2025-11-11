@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:15:26 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/10 17:17:19 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 02:18:02 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,8 @@ void	eating(t_philo *philo)
 		first = philo->r_fork;
 		second = philo->l_fork;
 	}
-	pthread_mutex_lock(first);
-	print_state("has taken a fork", philo);
-	if (philo->rules->number_of_philos == 1)
-	{
-		usleep(philo->rules->time_to_die * 1000);
-		pthread_mutex_unlock(first);
+	if (!grab_forks(philo, first, second))
 		return ;
-	}
-	if (dead_loop(philo))
-	{
-		pthread_mutex_unlock(first);
-		return ;
-	}
-	pthread_mutex_lock(second);
-	print_state("has taken a fork", philo);
 	print_state("is eating", philo);
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_time();
@@ -80,4 +67,24 @@ void	eating(t_philo *philo)
 	ft_usleep(philo->rules->time_to_eat, philo);
 	pthread_mutex_unlock(first);
 	pthread_mutex_unlock(second);
+}
+
+int	grab_forks(t_philo *phi, pthread_mutex_t *f, pthread_mutex_t *sec)
+{
+	pthread_mutex_lock(f);
+	print_state("has taken a fork", phi);
+	if (phi->rules->number_of_philos == 1)
+	{
+		usleep(phi->rules->time_to_die * 1010);
+		pthread_mutex_unlock(f);
+		return (0);
+	}
+	if (dead_loop(phi))
+	{
+		pthread_mutex_unlock(f);
+		return (0);
+	}
+	pthread_mutex_lock(sec);
+	print_state("has taken a fork", phi);
+	return (1);
 }

@@ -6,30 +6,17 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:06:54 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/09 20:44:55 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 02:17:02 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-// init structs
-int	init_rules(t_rules *rules, char **argv)
+int	init_mutexes(t_rules *rules)
 {
 	int	i;
 
 	i = 0;
-	rules->number_of_philos = ft_atol(argv[1]);
-	rules->time_to_die = ft_atol(argv[2]);
-	rules->time_to_eat = ft_atol(argv[3]);
-	rules->time_to_sleep = ft_atol(argv[4]);
-	rules->must_eat = -1;
-	rules->has_limit = false;
-	rules->philo_died = false;
-	if (argv[5])
-	{
-		rules->must_eat = ft_atol(argv[5]);
-		rules->has_limit = true;
-	}
 	rules->forks = malloc(sizeof(pthread_mutex_t) * rules->number_of_philos);
 	if (!rules->forks)
 		return (1);
@@ -46,7 +33,25 @@ int	init_rules(t_rules *rules, char **argv)
 	return (0);
 }
 
-// init structs
+int	init_rules(t_rules *rules, char **argv)
+{
+	rules->number_of_philos = ft_atol(argv[1]);
+	rules->time_to_die = ft_atol(argv[2]);
+	rules->time_to_eat = ft_atol(argv[3]);
+	rules->time_to_sleep = ft_atol(argv[4]);
+	rules->must_eat = -1;
+	rules->has_limit = false;
+	rules->philo_died = false;
+	if (argv[5])
+	{
+		rules->must_eat = ft_atol(argv[5]);
+		rules->has_limit = true;
+	}
+	if (init_mutexes(rules))
+		return (1);
+	return (0);
+}
+
 t_philo	*init_philos(t_rules *rules)
 {
 	int		i;
