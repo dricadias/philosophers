@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 01:01:01 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 01:29:25 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 12:54:28 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	main(int argc, char **argv)
 		return (printf("error: invalid args.\n"), 1);
 	if (init_rules(&rules, argv) != 0)
 		destroy_all(NULL, &rules);
+	rules.start_time = get_time();
 	philo = init_philos(&rules);
 	if (!philo)
 		destroy_all(philo, &rules);
-	rules.start_time = get_time();
 	create_threads(philo, &rules);
 	destroy_all(philo, &rules);
 	return (0);

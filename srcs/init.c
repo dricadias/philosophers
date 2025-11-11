@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:06:54 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 02:17:02 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 11:38:05 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_philo	*init_philos(t_rules *rules)
 	{
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
-		philos[i].last_meal = get_time();
+		philos[i].last_meal = rules->start_time;
 		philos[i].l_fork = &rules->forks[i];
 		philos[i].r_fork = &rules->forks[(i + 1) % rules->number_of_philos];
 		philos[i].rules = rules;

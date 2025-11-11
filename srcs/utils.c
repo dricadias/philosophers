@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:05:11 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 01:38:15 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:27:57 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ long	ft_atol(const char *str)
 int	check_args(char **argv)
 {
 	int		i;
-	int		j;
+	int		j; // comentario do nada pra lembrar de ver o comentario de cima
 	long	temp;
 
 	i = 1;
