@@ -6,7 +6,7 @@
 /*   By: adias-do <adias-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:42 by adias-do          #+#    #+#             */
-/*   Updated: 2025/11/11 01:20:23 by adias-do         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:19:54 by adias-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			grab_forks(t_philo *phi, pthread_mutex_t *f, pthread_mutex_t *sec);
 void		destroy_all(t_philo *philo, t_rules *rules);
 
 // init structs
+int			init_mutexes(t_rules *rules);
 int			init_rules(t_rules *rules, char **argv);
 t_philo		*init_philos(t_rules *rules);
 
